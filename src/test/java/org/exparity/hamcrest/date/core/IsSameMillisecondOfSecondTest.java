@@ -19,40 +19,45 @@ public class IsSameMillisecondOfSecondTest {
 
     private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the millisecond [0-9]*\\s*but: the date has the millisecond [0-9]*";
 
-	// Date Matchers
-	@Test
-	public void isDateSameMillisecond() {
-		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, DateMatchers.sameMillisecond(date));
-	}
+    // Date Matchers
+    @Test
+    public void isDateSameMillisecond() {
+        Date date = new Date(), other = new Date(date.getTime());
+        assertThat(other, DateMatchers.sameMillisecond(date));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isDateNotSameMillisecond() {
-		Date date = new Date(), other = addDateField(date, Calendar.MILLISECOND, 1);
-		assertThat(other, DateMatchers.sameMillisecond(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameMillisecond() {
+        Date date = new Date(), other = addDateField(date, Calendar.MILLISECOND, 1);
+        assertThat(other, DateMatchers.sameMillisecond(date));
+    }
 
-	@Test
-	public void isDateSameMillisecondDifferentSecond() {
-		Date date = new Date(), other = addDateField(date, Calendar.SECOND, 1);
-		assertThat(other, DateMatchers.sameMillisecond(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameMillisecondOfNull() {
+        assertThat(new Date(), DateMatchers.sameMillisecond(null));
+    }
 
-	@Test
-	public void isDateSameMillisecondOfSecond() {
-		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
-	}
+    @Test
+    public void isDateSameMillisecondDifferentSecond() {
+        Date date = new Date(), other = addDateField(date, Calendar.SECOND, 1);
+        assertThat(other, DateMatchers.sameMillisecond(date));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isDateNotSameMillisecondOfSecond() {
-		Date date = new Date(), other = addDateField(date, Calendar.MILLISECOND, 1);
-		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
-	}
+    @Test
+    public void isDateSameMillisecondOfSecond() {
+        Date date = new Date(), other = new Date(date.getTime());
+        assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
+    }
 
-	@Test
-	public void isDateSameMillisecondOfSecondDifferentSecond() {
-		Date date = new Date(), other = addDateField(date, Calendar.SECOND, 1);
-		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameMillisecondOfSecond() {
+        Date date = new Date(), other = addDateField(date, Calendar.MILLISECOND, 1);
+        assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
+    }
+
+    @Test
+    public void isDateSameMillisecondOfSecondDifferentSecond() {
+        Date date = new Date(), other = addDateField(date, Calendar.SECOND, 1);
+        assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
+    }
 }

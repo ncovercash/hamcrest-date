@@ -27,13 +27,13 @@ public class DateWrapper implements TemporalWrapper<Date> {
 	private final TemporalUnit accuracy;
 
 	public DateWrapper(final Date date) {
-		wrapped = date.toInstant();
-		accuracy = ChronoUnit.MILLIS;
+		this.wrapped = date.toInstant();
+		this.accuracy = ChronoUnit.MILLIS;
 	}
 
 	public DateWrapper(final LocalDate date) {
-		wrapped = ZonedDateTime.of(date, LocalTime.NOON, ZoneId.systemDefault()).toInstant();
-		accuracy = ChronoUnit.DAYS;
+		this.wrapped = ZonedDateTime.of(date, LocalTime.NOON, ZoneId.systemDefault()).toInstant();
+		this.accuracy = ChronoUnit.DAYS;
 	}
 
 	public DateWrapper(final int year, final Month month, final int dayOfMonth) {
@@ -42,49 +42,49 @@ public class DateWrapper implements TemporalWrapper<Date> {
 
 	public DateWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute,
 			final int second) {
-		wrapped = ZonedDateTime
+		this.wrapped = ZonedDateTime
 				.of(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), ZoneId.systemDefault())
 					.toInstant();
-		accuracy = ChronoUnit.SECONDS;
+		this.accuracy = ChronoUnit.SECONDS;
 	}
 
 	public DateWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute,
 			final int second, final int millis) {
-		wrapped = ZonedDateTime
+		this.wrapped = ZonedDateTime
 				.of(
 						LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, millis * 1000000),
 							ZoneId.systemDefault())
 					.toInstant();
-		accuracy = ChronoUnit.MILLIS;
+		this.accuracy = ChronoUnit.MILLIS;
 	}
 
 	@Override
 	public long difference(final Date other, final ChronoUnit unit) {
-		return Math.abs(wrapped.truncatedTo(accuracy).until(other.toInstant().truncatedTo(accuracy), unit));
+		return Math.abs(this.wrapped.truncatedTo(this.accuracy).until(other.toInstant().truncatedTo(this.accuracy), unit));
 	}
 
 	@Override
 	public boolean isAfter(final Date other) {
-		return wrapped.truncatedTo(accuracy).isAfter(other.toInstant().truncatedTo(accuracy));
+		return this.wrapped.truncatedTo(this.accuracy).isAfter(other.toInstant().truncatedTo(this.accuracy));
 	}
 
 	@Override
 	public boolean isBefore(final Date other) {
-		return wrapped.truncatedTo(accuracy).isBefore(other.toInstant().truncatedTo(accuracy));
+		return this.wrapped.truncatedTo(this.accuracy).isBefore(other.toInstant().truncatedTo(this.accuracy));
 	}
 
 	@Override
 	public boolean isSame(final Date other) {
-		return wrapped.truncatedTo(accuracy).equals(other.toInstant().truncatedTo(accuracy));
+		return this.wrapped.truncatedTo(this.accuracy).equals(other.toInstant().truncatedTo(this.accuracy));
 	}
 
 	@Override
 	public boolean isSameDay(final Date other) {
-		return wrapped.truncatedTo(ChronoUnit.DAYS).equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
+		return this.wrapped.truncatedTo(ChronoUnit.DAYS).equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
 	}
 
 	@Override
 	public Date unwrap() {
-		return new Date(wrapped.toEpochMilli());
+		return new Date(this.wrapped.toEpochMilli());
 	}
 }

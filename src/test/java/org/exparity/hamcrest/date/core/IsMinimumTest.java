@@ -22,56 +22,75 @@ public class IsMinimumTest {
 
     // Date Matchers
     @Test
-    public void isDateFirstDayOfMonth() {
+    public void isDateMinimum() {
         assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-    public void isDateNotFirstDayOfMonth() {
+    public void isDateNotMinimum() {
         assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNull() {
+        assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isMinimum(null));
     }
 
     // LocalDate Matchers
     @Test
-    public void isLocalDateFirstDayOfMonth() {
+    public void isLocalDateMinimum() {
         assertThat(AUG_01_2015, LocalDateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-    public void isLocalDateNotFirstDayOfMonth() {
+    public void isLocalDateNotMinimum() {
         assertThat(AUG_31_2015, LocalDateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateNull() {
+        assertThat(AUG_31_2015, LocalDateMatchers.isMinimum(null));
     }
 
     // LocalDateTime Matchers
     @Test
-    public void isLocalDateTimeFirstDayOfMonth() {
+    public void isLocalDateTimeMinimum() {
         assertThat(AUG_01_2015_NOON, LocalDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-    public void isLocalDateTimeNotFirstDayOfMonth() {
+    public void isLocalDateTimeNotMinimum() {
         assertThat(AUG_31_2015_NOON, LocalDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateTimeNull() {
+        assertThat(AUG_31_2015_NOON, LocalDateTimeMatchers.isMinimum(null));
     }
 
     // ZonedDateTime Matchers
     @Test
-    public void isZonedDateTimeFirstDayOfMonth() {
+    public void isZonedDateTimeMinimum() {
         assertThat(AUG_01_2015_NOON_UTC, ZonedDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-    public void isZonedDateTimeNotFirstDayOfMonth() {
+    public void isZonedDateTimeNotMinimum() {
         assertThat(AUG_31_2015_NOON_UTC, ZonedDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     // LocalTime Matchers
     @Test
-    public void isLocalTimeFirstHourOfDay() {
+    public void isLocalTimeMinimum() {
         assertThat(LocalTime.of(0, 0, 0), LocalTimeMatchers.isMinimum(ChronoField.HOUR_OF_DAY));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-    public void isLocalTimeNotFirstHourOfDay() {
+    public void isLocalTimeNotMinimum() {
         assertThat(LocalTime.of(1, 0, 0), LocalTimeMatchers.isMinimum(ChronoField.HOUR_OF_DAY));
+    }
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalTimeNull() {
+        assertThat(LocalTime.of(1, 0, 0), LocalTimeMatchers.isMinimum(null));
     }
 }

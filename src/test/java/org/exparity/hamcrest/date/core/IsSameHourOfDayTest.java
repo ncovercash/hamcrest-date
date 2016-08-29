@@ -25,91 +25,120 @@ public class IsSameHourOfDayTest {
 
     private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the hour [0-9]*\\s*but: the date has the hour [0-9]*";
 
-	// Date Matchers
-	@Test
-	public void isDateSameHour() {
-		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, DateMatchers.sameHour(date));
-	}
+    // Date Matchers
+    @Test
+    public void isDateSameHour() {
+        Date date = new Date(), other = new Date(date.getTime());
+        assertThat(other, DateMatchers.sameHour(date));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isDateNotSameHour() {
-		Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
-		assertThat(other, DateMatchers.sameHour(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameHour() {
+        Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
+        assertThat(other, DateMatchers.sameHour(date));
+    }
 
-	@Test
-	public void isDateSameMonthDifferentDay() {
-		Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
-		assertThat(other, DateMatchers.sameHour(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameHourAsNull() {
+        Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
+        assertThat(other, DateMatchers.sameHour(null));
+    }
 
-	@Test
-	public void isDateSameHourOfDay() {
-		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, DateMatchers.sameHourOfDay(date));
-	}
+    @Test
+    public void isDateSameMonthDifferentDay() {
+        Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
+        assertThat(other, DateMatchers.sameHour(date));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isDateNotSameHourOfDay() {
-		Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
-		assertThat(other, DateMatchers.sameHourOfDay(date));
-	}
+    @Test
+    public void isDateSameHourOfDay() {
+        Date date = new Date(), other = new Date(date.getTime());
+        assertThat(other, DateMatchers.sameHourOfDay(date));
+    }
 
-	@Test
-	public void isDateSameHourOfDayDifferentDay() {
-		Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
-		assertThat(other, DateMatchers.sameHourOfDay(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameHourOfDay() {
+        Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
+        assertThat(other, DateMatchers.sameHourOfDay(date));
+    }
 
-	// LocalDateTime Matchers
-	@Test
-	public void isLocalDateTimeSameHourOfDay() {
-		LocalDateTime date = LocalDateTime.now(), other = date;
-		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotSameHourOfDayAsNull() {
+        Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
+        assertThat(other, DateMatchers.sameHourOfDay(null));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isLocalDateTimeNotSameHourOfDay() {
-		LocalDateTime date = LocalDateTime.now(), other = date.plusHours(1);
-		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
-	}
+    @Test
+    public void isDateSameHourOfDayDifferentDay() {
+        Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
+        assertThat(other, DateMatchers.sameHourOfDay(date));
+    }
 
-	@Test
-	public void isLocalDateTimeSameHourOfDayDifferentDay() {
-		LocalDateTime date = LocalDateTime.now(), other = date.plusDays(1);
-		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
-	}
+    // LocalDateTime Matchers
+    @Test
+    public void isLocalDateTimeSameHourOfDay() {
+        LocalDateTime date = LocalDateTime.now(), other = date;
+        assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
+    }
 
-	// LocalTime Matchers
-	@Test
-	public void isLocalTimeSameHourOfDay() {
-		LocalTime date = LocalTime.now(), other = date;
-		assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateTimeNotSameHourOfDay() {
+        LocalDateTime date = LocalDateTime.now(), other = date.plusHours(1);
+        assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isLocalTimeNotSameHourOfDay() {
-		LocalTime date = LocalTime.now(), other = date.plusHours(1);
-		assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateTimeNotSameHourOfDayAsNull() {
+        LocalDateTime date = LocalDateTime.now(), other = date.plusHours(1);
+        assertThat(other, LocalDateTimeMatchers.sameHourOfDay(null));
+    }
 
-	// ZonedDateTime Matchers
-	@Test
-	public void isZonedDateTimeSameHourOfDay() {
-		ZonedDateTime date = ZonedDateTime.now(), other = date;
-		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
-	}
+    @Test
+    public void isLocalDateTimeSameHourOfDayDifferentDay() {
+        LocalDateTime date = LocalDateTime.now(), other = date.plusDays(1);
+        assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
+    }
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isZonedDateTimeNotSameHourOfDay() {
-		ZonedDateTime date = ZonedDateTime.now(), other = date.plusHours(1);
-		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
-	}
+    // LocalTime Matchers
+    @Test
+    public void isLocalTimeSameHourOfDay() {
+        LocalTime date = LocalTime.now(), other = date;
+        assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
+    }
 
-	@Test
-	public void isZonedDateTimeSameHourOfDayDifferentDay() {
-		ZonedDateTime date = ZonedDateTime.now(), other = date.plusDays(1);
-		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalTimeNotSameHourOfDay() {
+        LocalTime date = LocalTime.now(), other = date.plusHours(1);
+        assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalTimeNotSameHourOfDayAsNull() {
+        LocalTime date = LocalTime.now(), other = date.plusHours(1);
+        assertThat(other, LocalTimeMatchers.sameHourOfDay(null));
+    }
+
+    // ZonedDateTime Matchers
+    @Test
+    public void isZonedDateTimeSameHourOfDay() {
+        ZonedDateTime date = ZonedDateTime.now(), other = date;
+        assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isZonedDateTimeNotSameHourOfDay() {
+        ZonedDateTime date = ZonedDateTime.now(), other = date.plusHours(1);
+        assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isZonedDateTimeNotSameHourOfDayAsNull() {
+        assertThat(ZonedDateTime.now(), ZonedDateTimeMatchers.sameHourOfDay(null));
+    }
+
+    @Test
+    public void isZonedDateTimeSameHourOfDayDifferentDay() {
+        ZonedDateTime date = ZonedDateTime.now(), other = date.plusDays(1);
+        assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
+    }
 }

@@ -9,6 +9,8 @@ import static java.time.DayOfWeek.SUNDAY;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.DayOfWeek;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
@@ -43,6 +45,11 @@ public class IsDayOfWeekTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isDateNotDayOfWeek() {
         assertThat(JAN_01_2012_11AM_AS_DATE, DateMatchers.isDayOfWeek(SATURDAY));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNullDayOfWeek() {
+        assertThat(JAN_01_2012_11AM_AS_DATE, DateMatchers.isDayOfWeek((DayOfWeek)null));
     }
 
     @Test
